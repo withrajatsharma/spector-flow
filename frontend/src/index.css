@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family: roman;
+    src: url(./assets/Roman.woff);
+}
+
+@font-face {
+    font-family: media;
+    src: url(./assets/Mediu.woff);
+}
+
+@font-face {
+    font-family: head;
+    src: url(./assets/Heading-Now-Variable.ttf);
+}
+@font-face {
+    font-family: primary;
+    src: url(./assets/Rejouice-Headline.woff2);
+}
+@font-face {
+    font-family: secondary;
+    src: url(./assets/NBInternationalProBoo.woff2);
+}
