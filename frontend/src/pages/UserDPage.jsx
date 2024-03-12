@@ -3,12 +3,18 @@ import React from "react";
 const UserDPage = () => {
   return (
     <main className="absolute top-0 left-0 bg-[#0a051d] w-full pt-24">
-      <div className="w-full h-[calc(100vh-6rem)] flex">
+      <div className="w-full h-[calc(100vh-6rem)] flex items-center">
 
-        <div className="w-1/2"></div>
+        <div className="w-1/2">
+          
+        <div class="absolute w-[30%] h-[60%] animate-updown blur-lg top-40 lg:animate-updownlg  rounded-full -right-10 sm:-right-28 md:right-[60%] bg-gradient-to-tr from-[#675bc6] to-[#01041e]"></div>
+
+            
+{/* <div class="absolute  blur-xl md:blur-2xl animate-spinslow h-[60%] w-[50%] rounded-full right-10 top-40  md:right-80 lg:left-20  bg-[#ed6432]"></div> */}
+        </div>
 
       <div className=" w-1/2  ">
-      <form class="max-w-sm mx-auto pt-10">
+      <form class="max-w-sm mx-auto -mt-20">
           <label
             for="website-admin"
             class="block mb-2 text-lg font-medium text-white"
@@ -38,7 +44,7 @@ const UserDPage = () => {
 
 
           
-          <label for="email-address-icon" class="block mb-2 mt-8 text-sm font-medium text-white">Your Email</label>
+          <label for="email-address-icon" class="block mb-2 mt-8 text-lg font-medium text-white">Your Email</label>
   <div class="relative">
     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
       <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
@@ -48,6 +54,14 @@ const UserDPage = () => {
     </div>
     <input type="text" id="email-address-icon" class="border text-sm rounded-lg block w-full ps-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="name@spector.com"/>
   </div>
+
+
+
+
+
+
+  <label for="message" class="block mb-2 mt-8 text-lg font-medium text-white">Your message</label>
+  <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border    dark:bg-gray-700 border-gray-600 placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a feedback..."></textarea>
         </form>
       </div>
 
