@@ -2,9 +2,13 @@ import React from "react";
 import motionGif from "../assets/motiongif.gif";
 import Pattern from "../components/Pattern.jsx";
 import Button from "../components/Button.jsx"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 const HomePage = () => {
+
+  const navigate = useNavigate();
+
+  
   return (
     <main className=" w-full">
       <div className="bg-black opacity-40 absolute h-[125vh] w-full top-0 left-0 -z-10"></div>
@@ -83,14 +87,14 @@ const HomePage = () => {
 
 <Pattern />
 
-<div className="ml-10 mt-10">
+<div onClick={()=>navigate("/darkpattern")} className="ml-10 mt-10">
 
-    <Link to={"/darkpattern"}>
+   
 
     <Button >
       View More →
           </Button>
-    </Link>
+    
 </div>
 
 </section>

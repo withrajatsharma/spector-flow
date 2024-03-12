@@ -8,12 +8,14 @@ import NavBar from './components/NavBar'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import Gsap from "./Gsap.jsx";
+import ScrollToTop from './components/ScrollToTop.jsx'
 
 
 const App = () => {
   Gsap();
   return (
     <main className=' font-[secondary] text-slate-100'>
+      <ScrollToTop />
     <NavBar />
     <Routes>
       <Route path='/' element={<HomePage/>} />
