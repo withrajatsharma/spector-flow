@@ -62,12 +62,15 @@ const UserDPage = () => {
 
   <label for="message" class="block mb-2 mt-8 text-lg font-medium text-white">Your message</label>
   <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border    dark:bg-gray-700 border-gray-600 placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a feedback..."></textarea>
+
+
+  <button type="submit" class="text-white focus:ring-4 mt-10 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Submit</button>
+
         </form>
       </div>
 
 
-        
-
+     
 
       </div>
     </main>
