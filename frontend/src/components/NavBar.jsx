@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import { useLocation } from "react-router-dom";
+
+
 
 const NavBar = () => {
+
   return (
-    <nav className="w-full h-24 flex justify-between items-center px-10">
+    <nav className={`w-full h-24 flex justify-between items-center px-10 relative z-20`}>
       <div className="flex gap-4 text-base ">
 
 
