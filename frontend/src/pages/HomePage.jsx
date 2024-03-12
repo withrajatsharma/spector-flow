@@ -1,5 +1,6 @@
 import React from "react";
 import motionGif from "../assets/motiongif.gif";
+import Pattern from "../components/Pattern.jsx";
 
 const HomePage = () => {
   return (
@@ -76,8 +77,11 @@ const HomePage = () => {
         </div>
       </div>
 
+<section className="bg-[#0a051d]">
 
-        
+<Pattern />
+</section>
+
 
 
 
