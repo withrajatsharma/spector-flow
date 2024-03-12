@@ -1,7 +1,6 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import AboutPage from './pages/AboutPage.jsx'
 import UserDPage from './pages/UserDPage.jsx'
 import ExtensionPage from './pages/ExtensionPage.jsx'
 import DarkPatternPage from './pages/DarkPatternPage.jsx'
@@ -14,12 +13,10 @@ import Gsap from "./Gsap.jsx";
 const App = () => {
   Gsap();
   return (
-    // bg-[#161618]
-    <main className=' font-[secondary]'>
+    <main className=' font-[secondary] text-slate-100'>
     <NavBar />
     <Routes>
       <Route path='/' element={<HomePage/>} />
-      {/* <Route path='/about' element={<AboutPage/>} /> */}
       <Route path='/extension' element={<ExtensionPage/>} />
       <Route path='/userd' element={<UserDPage/>} />
       <Route path='/darkpattern' element={<DarkPatternPage/>} />

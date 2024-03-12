@@ -9,7 +9,7 @@ export default {
       fontFamily :{
         roman : "roman",
         media : "media",
-      } 
+      } ,
     },
   },
   plugins: [],
