@@ -1,6 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const UserDPage = () => {
+
+      const [feed,setFeed] = useState({
+        name:"",
+        email:"",
+        comment:"",
+      })
+
+
+      const handleChange = (e) => {
+
+        setFeed({...feed, [e.target.name]:e.target.value,})
+
+      }
+
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // console.log(feed);
+        const response = await axios.post("http://localhost:4000/api/user/feedback",feed);
+
+        if(response.data.success){
+          setFeed({
+            name:"",
+        email:"",
+        comment:"",
+          })
+          toast.success('feedback submitted')
+        }
+        else{
+          toast.error('error submitting feedback');
+        }
+
+
+
+
+      }
+
+
+
+
+
   return (
     <main className="absolute top-0 left-0 bg-[#0a051d] w-full pt-24">
       <div className="w-full h-[calc(100vh-6rem)] flex items-center">
@@ -14,7 +59,9 @@ const UserDPage = () => {
         </div>
 
       <div className=" w-1/2  ">
-      <form class="max-w-sm mx-auto -mt-20">
+      <form
+        onSubmit={handleSubmit}
+      class="max-w-sm mx-auto -mt-20">
           <label
             for="website-admin"
             class="block mb-2 text-lg font-medium text-white"
@@ -34,6 +81,9 @@ const UserDPage = () => {
               </svg>
             </span>
             <input
+              onChange={handleChange}
+              name="name"
+              value={feed.name}
               type="text"
               id="website-admin"
               class="rounded-none rounded-e-lg  border  block flex-1 min-w-0 w-full text-sm p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
@@ -52,7 +102,11 @@ const UserDPage = () => {
         <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
       </svg>
     </div>
-    <input type="text" id="email-address-icon" class="border text-sm rounded-lg block w-full ps-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="name@spector.com"/>
+    <input
+      onChange={handleChange}
+      name="email"
+      value={feed.email}
+    type="text" id="email-address-icon" class="border text-sm rounded-lg block w-full ps-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="name@spector.com"/>
   </div>
 
 
@@ -61,7 +115,11 @@ const UserDPage = () => {
 
 
   <label for="message" class="block mb-2 mt-8 text-lg font-medium text-white">Your message</label>
-  <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border    dark:bg-gray-700 border-gray-600 placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a feedback..."></textarea>
+  <textarea
+    onChange={handleChange}
+    name="comment"
+    value={feed.comment}
+  id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border    dark:bg-gray-700 border-gray-600 placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a feedback..."></textarea>
 
 
   <button type="submit" class="text-white focus:ring-4 mt-10 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Submit</button>

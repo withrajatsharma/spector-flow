@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import Gsap from "./Gsap.jsx";
 import ScrollToTop from './components/ScrollToTop.jsx'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const App = () => {
@@ -25,6 +26,10 @@ const App = () => {
       <Route path='/login' element={<LoginPage/>} />
       <Route path='/signup' element={<SignupPage/>} />
     </Routes>
+    <Toaster
+      position="top-right"
+      reverseOrder={false}
+    />
     </main>
     
   )
