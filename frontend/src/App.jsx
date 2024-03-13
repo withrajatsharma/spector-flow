@@ -10,6 +10,7 @@ import SignupPage from './pages/SignupPage.jsx'
 import Gsap from "./Gsap.jsx";
 import ScrollToTop from './components/ScrollToTop.jsx'
 import toast, { Toaster } from 'react-hot-toast';
+import CheckP from './pages/CheckP.jsx'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
       <Route path='/darkpattern' element={<DarkPatternPage/>} />
       <Route path='/login' element={<LoginPage/>} />
       <Route path='/signup' element={<SignupPage/>} />
+      <Route path='/checkp' element={<CheckP/>} />
     </Routes>
     <Toaster
       position="top-right"

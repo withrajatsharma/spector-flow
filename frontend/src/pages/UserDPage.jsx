@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-
+import { Link } from "react-router-dom";
 
 const UserDPage = () => {
 
@@ -37,9 +37,6 @@ const UserDPage = () => {
           toast.error('error submitting feedback');
         }
 
-
-
-
       }
 
 
@@ -56,6 +53,8 @@ const UserDPage = () => {
 
             
 {/* <div class="absolute  blur-xl md:blur-2xl animate-spinslow h-[60%] w-[50%] rounded-full right-10 top-40  md:right-80 lg:left-20  bg-[#ed6432]"></div> */}
+
+
         </div>
 
       <div className=" w-1/2  ">
@@ -121,8 +120,15 @@ const UserDPage = () => {
     value={feed.comment}
   id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border    dark:bg-gray-700 border-gray-600 placeholder-gray-400 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Leave a feedback..."></textarea>
 
+      <div className="flex items-center  justify-between mt-10">
+  <button type="submit" class="text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Submit</button>
+  <p className=" text-slate-300">or</p>
+  <Link to={"/checkp"}  class="text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-purple-600 hover:bg-purple-700 focus:ring-purple-800">Check for dark pattern</Link>
 
-  <button type="submit" class="text-white focus:ring-4 mt-10 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Submit</button>
+      </div>
+
+
+
 
         </form>
       </div>
