@@ -5,10 +5,45 @@ import { Link } from "react-router-dom";
 
 const UserDPage = () => {
 
+  const [image,setImage] = useState(null);
+
+  const [websiteName,setWebsiteName] = useState("")
+
+  const handleFileChange = (e) =>{
+      const img = e.target.files[0];
+      setImage(img);
+  }
+
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+
+      formData.append("website",websiteName)
+      formData.append("image",image)
+
+
+      try {
+
+        const response = await axios.post("http://localhost:4000/api/user/geminires",formData,{
+          headers:{
+            "Content-Type":"multipart/form-data"
+          }
+        })
+
+        console.log(response);
+        
+      } catch (error) {
+        console.log(`error: ${error}`);
+        
+      }
+
+  };
+
+
+
      
-
-
-
 
 
   return (
@@ -25,6 +60,7 @@ const UserDPage = () => {
 
       <div className=" w-1/2  ">
       <form
+      onSubmit={handleSubmit}
       class="max-w-sm mx-auto -mt-20">
           <label
             for="website-admin"
@@ -35,6 +71,8 @@ const UserDPage = () => {
           <div class="flex">
             
             <input
+            value={websiteName}
+            onChange={(e)=>setWebsiteName(e.target.value)}
               name="website"
               type="text"
               id="website-admin"
@@ -49,6 +87,9 @@ const UserDPage = () => {
          
   <label for="file-input" className="block text-lg font-medium text-white">Choose file</label>
   <input
+  onChange={handleFileChange}
+  // value={image}
+  accept=".png"
   type="file" name="file" id="file-input" class="block w-full border mt-2 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 disabled:opacity-50 disabled:pointer-events-none bg-slate-900 border-gray-700 text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-600
  file:border-0
     file:me-4
