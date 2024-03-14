@@ -1,89 +1,114 @@
+
+
+import cloudinary from "cloudinary";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import fs from "fs";
-import dotenv from "dotenv"
-
-
+// import fs from "fs";
+import axios from "axios";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-
-// async function fileToGenerativePart(file) {
-//   const base64EncodedDataPromise = new Promise((resolve) => {
-//     const reader = new FileReader();
-//     reader.onloadend = () => resolve(reader.result.split(',')[1]);
-//     reader.readAsDataURL(file);
-//   });
+// async function urlToGenerativePart(url, mimeType) {
+//   const response = await axios.get(url, { responseType: "arraybuffer" });
+//   const buffer = Buffer.from(response.data, "binary").toString("base64");
 //   return {
-//     inlineData: { data: await base64EncodedDataPromise, mimeType: file.type },
+//     inlineData: {
+//       data: buffer,
+//       mimeType
+//     }
 //   };
 // }
 
-function fileToGenerativePart(path, mimeType) {
+
+
+// accept all types of mimetypes
+
+async function urlToGenerativePart(url) {
+  const response = await axios.get(url, { responseType: "arraybuffer" });
+  const mimeType = response.headers["content-type"];
+  const buffer = Buffer.from(response.data, "binary").toString("base64");
   return {
     inlineData: {
-      data: Buffer.from(fs.readFileSync(path)).toString("base64"),
+      data: buffer,
       mimeType
-    },
+    }
   };
 }
 
+
+
+
+const geminiRes = async (req, res) => {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+
+    const {image} = req.files
+
+
+    const cloudinaryRes = await cloudinary.uploader.upload(
+      image.tempFilePath,{
+        folder: 'darkPattern'
+      }
+  )
+
   
-
-const geminiRes = async (req,res) => {
-    try {
-      
-      // const{website,image}=req.body
-        
-        
-      
-        const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-
-        const prompt = "What's this picture?";
-
-
-
-
-        // const fileInputEl = `D:/R/web dev vs coding/spector-flow/spector-flow/backend/assets/image.png`;
-        // const imageParts = await Promise.all(
-        //   // [...fileInputEl.files].map(fileToGenerativePart)
-        //   fileInputEl
-        // );
-      
-        // const result = await model.generateContent([prompt, ...imageParts]);
-        // const response = await result.response;
-        // const text = response.text();
-        // console.log(text);
-      
-        const imageParts = [
-          fileToGenerativePart("D:/R/web dev vs coding/spector-flow/spector-flow/backend/assets/image2.png", "image/png"),
-        ];
+  if(!cloudinaryRes||cloudinaryRes.error){
+    return res.json({
+      success:false,
+      message:"error from cloudinary",
+      error:cloudinaryRes.error
+    })
+  }
   
-        // const result = await model.generateContent([prompt, image]);
-        const result = await model.generateContent([prompt, ...imageParts]);
-        const response = await result.response;
-        const text = response.text();
-        res.status(200).json({
-            success: true,
-            message: text
-        });
+  const imageUrl = cloudinaryRes.secure_url;
 
 
+    
+    // const {websiteName} = req.body; // Assuming imageUrl is sent in the request body
+    
+    const prompt = `what is in the image`;
+    
+    // const imageUrl = "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA5L3Jhd3BpeGVsX29mZmljZV8yOF9mZW1hbGVfbWluaW1hbF9yb2JvdF9mYWNlX29uX2RhcmtfYmFja2dyb3VuZF81ZDM3YjhlNy04MjRkLTQ0NWUtYjZjYy1hZmJkMDI3ZTE1NmYucG5n.png"
 
+    const imageParts = await urlToGenerativePart(imageUrl);
 
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message:" error while generating response from gemini",
-            error:error.message
-        });
-        
-    }
-}
+    const result = await model.generateContent([prompt, imageParts]);
+    const response = await result.response;
+    const text = await response.text();
+    res.status(200).json({
+      success: true,
+      message: text
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error while generating response from gemini",
+      error: error.message
+    });
+  }
+};
 
+export default geminiRes;
 
-export default geminiRes
 
 
 

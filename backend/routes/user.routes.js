@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.post('/feedback',feedBack);
-router.get('/geminires',geminiRes);
+router.post('/geminires',geminiRes);
 
 
 export default router;

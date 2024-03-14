@@ -59,8 +59,10 @@ const UserDPage = () => {
 
       <div className=" w-1/2  ">
       <form
+      autocomplete="off"
         onSubmit={handleSubmit}
       class="max-w-sm mx-auto -mt-20">
+        <input className="hidden" autocomplete="false" name="hidden" type="text" />
           <label
             for="website-admin"
             class="block mb-2 text-lg font-medium text-white"
@@ -80,6 +82,7 @@ const UserDPage = () => {
               </svg>
             </span>
             <input
+            
               onChange={handleChange}
               name="name"
               value={feed.name}
@@ -115,6 +118,7 @@ const UserDPage = () => {
 
   <label for="message" class="block mb-2 mt-8 text-lg font-medium text-white">Your message</label>
   <textarea
+  
     onChange={handleChange}
     name="comment"
     value={feed.comment}
