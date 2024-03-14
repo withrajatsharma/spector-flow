@@ -1,25 +1,5 @@
-
-
 import cloudinary from "cloudinary";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
-// import fs from "fs";
 import axios from "axios";
 import dotenv from "dotenv";
 
@@ -64,7 +44,7 @@ const geminiRes = async (req, res) => {
     const {image} = req.files
 
 
-    const cloudinaryRes = await cloudinary.uploader.upload(
+    const cloudinaryRes = await cloudinary.v2.uploader.upload(
       image.tempFilePath,{
         folder: 'darkPattern'
       }
@@ -80,14 +60,13 @@ const geminiRes = async (req, res) => {
   }
   
   const imageUrl = cloudinaryRes.secure_url;
+  const public_id = cloudinaryRes.public_id;
 
 
     
-    // const {websiteName} = req.body; // Assuming imageUrl is sent in the request body
+    // const {websiteName} = req.body; 
     
     const prompt = `what is in the image`;
-    
-    // const imageUrl = "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA5L3Jhd3BpeGVsX29mZmljZV8yOF9mZW1hbGVfbWluaW1hbF9yb2JvdF9mYWNlX29uX2RhcmtfYmFja2dyb3VuZF81ZDM3YjhlNy04MjRkLTQ0NWUtYjZjYy1hZmJkMDI3ZTE1NmYucG5n.png"
 
     const imageParts = await urlToGenerativePart(imageUrl);
 
@@ -96,7 +75,8 @@ const geminiRes = async (req, res) => {
     const text = await response.text();
     res.status(200).json({
       success: true,
-      message: text
+      message: text,
+      public_id:public_id
     });
   } catch (error) {
     res.status(500).json({
@@ -108,7 +88,3 @@ const geminiRes = async (req, res) => {
 };
 
 export default geminiRes;
-
-
-
-

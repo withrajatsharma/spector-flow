@@ -46,13 +46,19 @@ const UserDPage = () => {
           headers:{
             "Content-Type":"multipart/form-data"
           }
+          
         })
-        
+        // console.log(response.data);
        
       
           
           if(response.data.success){
             toast.dismiss();
+            
+
+             
+
+
             // toast.success(response.data.message)
 
             toast.custom((t) => (
@@ -72,7 +78,7 @@ const UserDPage = () => {
                 </div>
               </div>
               <div
-              onClick={() => toast.dismiss()}
+              onClick={()=> toast.dismiss()}
               className="flex border-l border-gray-400">
                 <button
                   
@@ -87,6 +93,16 @@ const UserDPage = () => {
             position: 'top-center',
 
           })
+
+
+          try {
+            const delRes = await axios.post("http://localhost:4000/api/user/delete",{
+              public_id: response.data.public_id
+            })
+            // console.log(delRes.data);
+          } catch (error) {
+            console.log(`error occured while deleting`);
+          }
             
 
 
