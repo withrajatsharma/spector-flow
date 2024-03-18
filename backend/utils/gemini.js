@@ -7,24 +7,8 @@ dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-// async function urlToGenerativePart(url, mimeType) {
-//   const response = await axios.get(url, { responseType: "arraybuffer" });
-//   const buffer = Buffer.from(response.data, "binary").toString("base64");
-//   return {
-//     inlineData: {
-//       data: buffer,
-//       mimeType
-//     }
-//   };
-// }
-
-
-
-// accept all types of mimetypes
-
-async function urlToGenerativePart(url) {
+async function urlToGenerativePart(url, mimeType) {
   const response = await axios.get(url, { responseType: "arraybuffer" });
-  const mimeType = response.headers["content-type"];
   const buffer = Buffer.from(response.data, "binary").toString("base64");
   return {
     inlineData: {
@@ -37,6 +21,7 @@ async function urlToGenerativePart(url) {
 
 
 
+
 const geminiRes = async (req, res) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
@@ -44,40 +29,19 @@ const geminiRes = async (req, res) => {
     const {image} = req.files
 
 
-    const cloudinaryRes = await cloudinary.v2.uploader.upload(
-      image.tempFilePath,{
-        folder: 'darkPattern'
-      }
+    const cloudinaryRes = await cloudinary.uploader.upload(
+      image.tempFilePath
   )
 
-  
-  if(!cloudinaryRes||cloudinaryRes.error){
-    return res.json({
-      success:false,
-      message:"error from cloudinary",
-      error:cloudinaryRes.error
-    })
-  }
-  
-  const imageUrl = cloudinaryRes.secure_url;
-  const public_id = cloudinaryRes.public_id;
-
-
-    
-    // const {websiteName} = req.body; 
     
     const prompt = `what is in the image`;
 
-    const imageParts = await urlToGenerativePart(imageUrl);
+    const imageParts = await urlToGenerativePart(`url`);
 
     const result = await model.generateContent([prompt, imageParts]);
     const response = await result.response;
     const text = await response.text();
-    res.status(200).json({
-      success: true,
-      message: text,
-      public_id:public_id
-    });
+
   } catch (error) {
     res.status(500).json({
       success: false,
