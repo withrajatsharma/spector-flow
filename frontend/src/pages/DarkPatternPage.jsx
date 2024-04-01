@@ -43,21 +43,7 @@ const DarkPatternPage = () => {
         p:"Instagram's privacy settings may be presented in a confusing or misleading manner, making it difficult for users to understand and control the visibility of their personal information and activity on the platform..",
         img:insta
     },
-    {
-        h:"Sneak into Basket",
-        p:"it involves adding items to a user's shopping cart without their explicit consent or knowledge. This often occurs when users interact with checkboxes or buttons that are pre-selected by default, resulting in unwanted items being added to their purchase.",
-        img:sneak
-    },
-    {
-        h:"Price Comparison Prevention",
-        p:"Websites employing this dark pattern intentionally make it difficult for users to compare prices with competitors by hiding pricing. This tactic aims to discourage users from seeking better deals elsewhere, ultimately leading to higher profits for the website.",
-        img:price
-    },
-    {
-        h:"Misdirection",
-        p:"it involves using visual cues or manipulative design  to divert users' attention away from important information or actions. For example, websites may use flashy graphics or pop-ups to distract users from noticing hidden fees or unfavorable terms and conditions.",
-        img:misdirection
-    },
+ 
   ]
 
 
@@ -73,7 +59,7 @@ const DarkPatternPage = () => {
       <p className='text-2xl font-medium text-center px-28 mt-16 '>Welcome to our Dark Pattern Directory, where we highlight websites known for employing deceptive design tactics. Stay informed and protect yourself from manipulative practices by exploring the list below.</p>
 
 
-        <div className=' flex flex-wrap gap-20 justify-center py-24'>
+        <div className=' flex flex-wrap gap-10 justify-center py-24'>
 
           {
             data.map((p,i)=>(

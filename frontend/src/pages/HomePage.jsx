@@ -14,7 +14,7 @@ const HomePage = () => {
       <div className="bg-black opacity-40 absolute h-[125vh] w-full top-0 left-0 -z-10"></div>
       <img
         src={motionGif}
-        className="w-full -z-20 absolute -top-40 left-0"
+        className="w-screen h-screen -z-20 absolute top-0 left-0 object-cover"
         alt=""
       />
 
@@ -27,7 +27,7 @@ const HomePage = () => {
             ILLUMINATING THE DIGITAL <br /> SHADOWS.
           </h3>
         </nav>
-        <h1 className="cursor-default select-none relative bottom-[-5rem] font-[primary] text-[26vw] ">
+        <h1 className="cursor-default select-none relative bottom-[-5rem] font-[primary] text-[15vw] ">
           <span className=" inline-block">S</span>
           <span className=" inline-block">p</span>
           <span className=" inline-block">e</span>
@@ -35,6 +35,12 @@ const HomePage = () => {
           <span className=" inline-block">t</span>
           <span className=" inline-block">o</span>
           <span className=" inline-block">r</span>
+          
+          <span className=" inline-block"> F</span>
+          <span className=" inline-block"> l</span>
+          <span className=" inline-block"> o</span>
+          <span className=" inline-block"> w</span>
+
         </h1>
       </div>
 
